@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Créer mon invitation Prestige</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap">
+<style>
+:root{--bg:#FBF7F0;--ink:#12302F;--mut:#5c6b68;--gold:#B8923F;--line:#e6dcc8;--deep:#10302F;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 'Jost',system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:24px 20px 80px}
+h1{font:400 clamp(38px,8vw,58px)/1.05 'Cormorant Garamond',serif;margin:10px 0}h2{font:600 24px 'Cormorant Garamond',serif;margin:0 0 10px}
+.logo{font:italic 600 26px 'Cormorant Garamond',serif;text-decoration:none;color:inherit}
+.warn{background:#fff4d6;border:1px solid #e6cf8c;border-radius:12px;padding:12px 16px;font-size:14px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0}
+.f{margin-bottom:12px}label{display:block;font-size:13px;color:var(--mut);margin-bottom:3px}
+input,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{border:0;border-radius:999px;padding:13px 26px;background:var(--deep);color:#fff;font:500 16px 'Jost',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.gold{background:var(--gold)}.btn.s{padding:6px 14px;font-size:14px;background:none;color:var(--ink);border:1px solid var(--line)}
+iframe{width:100%;height:520px;border:1px solid var(--line);border-radius:12px;background:#0d2b26}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.small{font-size:13px;color:var(--mut)}#err{color:#a12;font-weight:500}#out{display:none}.pvw{position:relative}.pvw::after{content:"APERÇU — NON PAYÉ";position:absolute;inset:0;display:grid;place-items:center;text-align:center;font:600 clamp(24px,6vw,44px) 'Cormorant Garamond',serif;color:#fff;text-shadow:0 0 8px #000;opacity:.6;transform:rotate(-20deg);pointer-events:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media (max-width:560px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<a class="logo" href="index.html">Entrelacs</a>
+<h1>Créez votre invitation Prestige</h1>
+<p class="small">Remplissez le formulaire : vous obtenez une invitation animée avec un lien et un QR code pour chaque invité.</p>
+<div class="warn"><b>Version test.</b> Cette page n’est pas encore protégée : le paiement et les comptes clients ne sont pas branchés. Votre invitation est un fichier à publier vous-même (voir les instructions après la création).</div>
+<div class="card"><h2>Les mariés</h2><div class="row"><div class="f"><label for="n1">Premier prénom</label><input id="n1" value="Najwa"></div><div class="f"><label for="n2">Second prénom</label><input id="n2" value="Yassine"></div></div>
+<div class="row"><div class="f"><label for="date">Date</label><input id="date" type="date" value="2027-06-12"></div><div class="f"><label for="time">Heure</label><input id="time" type="time" value="19:00"></div></div></div>
+<div class="card"><h2>Le lieu</h2><div class="row"><div class="f"><label for="salle">Nom du lieu</label><input id="salle" value="Salle Les Jardins Élégants"></div><div class="f"><label for="ville">Ville</label><input id="ville" value="Marrakech"></div></div></div>
+<div class="card"><h2>Les invités</h2><div class="f"><label for="gl">Un invité par ligne : nom ; nombre de personnes (jusqu’à 300 invités)</label><textarea id="gl" rows="6" placeholder="Fatima Alaoui ; 2&#10;Karim Bennani ; 1">Fatima Alaoui ; 2
+Karim Bennani ; 1</textarea></div></div>
+<div class="card"><h2>Photos (jusqu’à 6)</h2><div class="f"><input id="ph" type="file" accept="image/*" multiple aria-label="Photos"></div><p class="small">Les photos sont réduites pour garder une page légère.</p></div>
+<div class="card"><h2>Réponses des invités</h2><div class="f"><label for="wa">Votre numéro WhatsApp avec l’indicatif, sans + (ex. 212612345678)</label><input id="wa" inputmode="numeric"></div><p class="small">Sans numéro, la section « Votre présence » reste cachée.</p></div>
+<p><button class="btn gold" id="go">Créer mon invitation</button> <span id="err" role="alert"></span></p>
+<div id="out"><div class="card"><h2>Votre invitation est prête</h2><div class="pvw"><iframe id="pv" title="Aperçu"></iframe></div>
+<div id="buy"></div>
+<p class="small"><b>Pour la mettre en ligne :</b> envoyez ce fichier sur votre dossier GitHub (Add file, Upload files), puis copiez l’adresse obtenue dans la case ci-dessous. Les liens des invités se complètent seuls.</p>
+<div class="f"><label for="bs">Adresse publique de l’invitation</label><input id="bs" placeholder="https://votrenom.github.io/plateforme-invitations/mon-invitation.html"></div></div>
+<div class="card"><h2>Liens des invités</h2><table><thead><tr><th>Invité</th><th></th></tr></thead><tbody id="tb"></tbody></table></div></div>
+</div>
+<script>
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// ===== RÉGLAGES DE VENTE =====
+const SHOP={mode:'test',price:69,payUrl:''};// mode: 'test' (gratuit) ou 'live' (paiement requis) ; payUrl : lien de paiement du prestataire
+// =============================
+let CF=null;
+function buy(url){$('buy').innerHTML=SHOP.mode==='test'?`<p class="warn">Mode test : le téléchargement est gratuit. En vente, il sera bloqué jusqu’au paiement (${SHOP.price} DH).</p><a class="btn" download="mon-invitation.html" href="${url}">Télécharger (mode test)</a>`:SHOP.payUrl?`<p>Pour recevoir votre invitation sans filigrane : <b>${SHOP.price} DH</b>.</p><a class="btn gold" href="${SHOP.payUrl}" target="_blank" rel="noopener">Payer par carte</a>`:`<p class="warn">Le paiement par carte n’est pas encore disponible.</p>`}
+const code=()=>Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>'abcdefghjkmnpqrstuvwxyz23456789'[b%31]).join('');
+function shrink(f){return createImageBitmap(f).then(b=>{const s=Math.min(1,700/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=b.width*s;c.height=b.height*s;c.getContext('2d').drawImage(b,0,0,c.width,c.height);return c.toDataURL('image/jpeg',.72)})}
+$('go').onclick=async()=>{const er=$('err');er.textContent='';
+const n1=$('n1').value.trim(),n2=$('n2').value.trim();if(!n1||!n2||!$('date').value){er.textContent='Indiquez les deux prénoms et la date.';return}
+const used=new Set(),guests=$('gl').value.split('\n').map(l=>l.trim()).filter(Boolean).slice(0,300).map(l=>{const p=l.split(/[;,]/);let c;do{c=code()}while(used.has(c));used.add(c);return{c,n:p[0].trim(),p:Math.max(1,Math.min(10,parseInt(p[1])||1))}});
+if(!guests.length){er.textContent='Ajoutez au moins un invité.';return}
+let tpl;try{tpl=await (await fetch('prestige.html')).text()}catch(e){tpl=''}
+if(!tpl.includes('À MODIFIER')){er.textContent='Ouvrez cette page depuis votre site en ligne (GitHub Pages) : le fichier prestige.html doit être à côté.';return}
+let photos=[];try{photos=await Promise.all(Array.from($('ph').files).slice(0,6).map(shrink))}catch(e){er.textContent='Une photo n’a pas pu être lue.';return}
+CF={n1,n2,date:$('date').value+'T'+($('time').value||'19:00')+':00',salle:$('salle').value.trim(),ville:$('ville').value.trim(),whatsapp:$('wa').value.replace(/\D/g,''),base:'',valid:'12 mois',demo:false,photos,guests};
+const mk='// ===== À MODIFIER =====',en='// ======================';
+const json=JSON.stringify(CF).replace(/</g,'\\u003c');
+const html=tpl.replace(/\/\/ ===== À MODIFIER =====[\s\S]*?\/\/ ======================/,()=>mk+'\nconst CFG='+json+';\n'+en).replace(/<title>[\s\S]*?<\/title>/,()=>'<title>'+esc(n1+' & '+n2)+'</title>');
+const url=URL.createObjectURL(new Blob([html],{type:'text/html'}));buy(url);$('pv').srcdoc=html;$('out').style.display='block';draw();$('out').scrollIntoView()};
+function draw(){const b=($('bs').value.trim().split('#')[0])||'ADRESSE';
+$('tb').innerHTML=CF.guests.map(g=>`<tr><td>${esc(g.n)}<br><span class="small">${g.p} pers. — ${b}#${g.c}</span></td><td><button class="btn s" data-a="c" data-c="${g.c}">Copier</button> <button class="btn s" data-a="w" data-c="${g.c}">WhatsApp</button></td></tr>`).join('')}
+$('bs').oninput=()=>{if(CF)draw()};
+$('tb').onclick=e=>{const t=e.target.closest('button');if(!t)return;const g=CF.guests.find(x=>x.c===t.dataset.c),b=$('bs').value.trim().split('#')[0];
+if(!b){alert('Collez d’abord l’adresse publique de l’invitation.');return}const l=b+'#'+g.c;
+if(t.dataset.a==='c'){navigator.clipboard?navigator.clipboard.writeText(l).then(()=>t.textContent='Copié ✓'):window.prompt('Copiez ce lien :',l)}
+else window.open('https://wa.me/?text='+encodeURIComponent('Bonjour '+g.n.split(' ')[0]+', voici votre invitation personnelle au mariage de '+CF.n1+' & '+CF.n2+' : '+l),'_blank')};
+</script></body></html>

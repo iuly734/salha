@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Najwa & Yassine — Invitation au mariage</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap">
+<style>
+:root{--g:#0d2b26;--g2:#16443d;--au:#d9b25f;--iv:#f6ecd2;color-scheme:dark;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}html{background:var(--g)}
+body{margin:0;background:radial-gradient(ellipse at 50% 0,var(--g2),var(--g) 70%) fixed;color:var(--iv);font:400 21px/1.5 'Cormorant Garamond',Georgia,serif;overflow-x:hidden;text-align:center}
+.script{font-family:'Pinyon Script',cursive;color:var(--au);font-weight:400}
+.frame{position:fixed;inset:calc(12px + env(safe-area-inset-top,0px)) 12px calc(12px + env(safe-area-inset-bottom,0px));border:1px solid rgba(217,178,95,.45);pointer-events:none;z-index:5}
+#sp{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.sp{position:absolute;bottom:-10px;border-radius:50%;background:var(--au);opacity:0;animation:fl linear infinite}
+@keyframes fl{0%{opacity:0;transform:translateY(0)}15%{opacity:.8}100%{opacity:0;transform:translateY(-105vh)}}
+/* Enveloppe */
+#cover{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:radial-gradient(circle,var(--g2),var(--g));transition:opacity 1.1s,transform 1.1s;cursor:pointer}
+#cover.gone{opacity:0;transform:scale(1.25);pointer-events:none}
+.env{position:relative;width:min(84vw,340px);aspect-ratio:3/2;perspective:900px;background:#cdb374;border-radius:4px;box-shadow:0 30px 60px -20px #000}
+.letter{position:absolute;left:7%;right:7%;top:6%;bottom:6%;background:var(--iv);color:#2b2a22;display:grid;place-items:center;transition:transform 1.1s .5s;z-index:1;font:italic 20px 'Cormorant Garamond',serif}
+.front{position:absolute;inset:0;background:#e3cf93;clip-path:polygon(0 100%,0 30%,50% 62%,100% 30%,100% 100%);z-index:2}
+.flap{position:absolute;left:0;right:0;top:0;height:62%;background:#d4bb7a;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s;z-index:3}
+.seal{position:absolute;left:50%;top:62%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0d58a,#a8812f);display:grid;place-items:center;font:24px 'Pinyon Script',cursive;color:#5a4210;z-index:4;box-shadow:0 4px 10px #0006;transition:opacity .4s;animation:pu 2s infinite}
+@keyframes pu{50%{transform:scale(1.1)}}
+.open .flap{transform:rotateX(180deg);z-index:0}.open .letter{transform:translateY(-55%)}.open .seal{opacity:0;animation:none}
+.tap{position:absolute;bottom:calc(14vh + env(safe-area-inset-bottom,0px));font-style:italic;opacity:.85;transition:opacity .4s}.open+.tap{opacity:0}
+/* Invitation */
+section{min-height:70svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 34px;position:relative;z-index:2}
+section.h{min-height:100svh}
+.rv{opacity:0;transform:translateY(22px);transition:opacity 1s,transform 1s}.in .rv,.rv.in{opacity:1;transform:none}
+.ar{font:28px 'Amiri',serif;color:var(--au);margin:0 0 20px}
+.small{font-size:20px;max-width:26ch;margin:0 auto}
+.names{font-size:clamp(54px,17vw,92px);line-height:1;margin:14px 0}
+.names span{display:block;clip-path:inset(0 100% 0 0);transition:clip-path 2.4s .4s ease-in-out}.names i{display:block;font-size:.45em;font-style:normal}
+.in .names span{clip-path:inset(-10px 0)}
+.rule{width:70px;height:1px;background:var(--au);margin:18px auto}
+.date{font-size:26px;margin:0}.sm{opacity:.8}
+h2{font:400 clamp(34px,9vw,46px)/1.1 'Pinyon Script',cursive;color:var(--au);margin:0 0 18px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:360px}
+.cd div{border:1px solid rgba(217,178,95,.5);padding:12px 2px;border-radius:4px}.cd b{display:block;font:600 34px 'Cormorant Garamond',serif}.cd small{font-size:14px;opacity:.8}
+.btn{display:inline-block;margin-top:18px;padding:13px 28px;border-radius:999px;background:var(--au);color:#2a2210;text-decoration:none;border:0;font:600 18px 'Cormorant Garamond',serif;cursor:pointer}
+.btn.o{background:none;color:var(--iv);border:1px solid var(--au)}
+input{width:min(100%,320px);padding:12px;border-radius:8px;border:1px solid var(--au);background:#0000;color:var(--iv);font:inherit;text-align:center}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+#mu{position:fixed;top:calc(24px + env(safe-area-inset-top,0px));right:24px;z-index:30;width:42px;height:42px;border-radius:50%;border:1px solid var(--au);background:#0d2b26cc;color:var(--au);font-size:18px;display:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--au);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<div id="cover" role="button" tabindex="0" aria-label="Ouvrir l’invitation">
+<div class="env" id="env"><div class="letter">Najwa &amp; Yassine</div><div class="front"></div><div class="flap"></div><div class="seal">N&amp;Y</div></div>
+<div class="tap">Touchez l’enveloppe pour l’ouvrir</div></div>
+<div class="frame"></div><div id="sp"></div>
+<button id="mu" aria-label="Musique">♪</button>
+<main id="inv">
+<section class="h"><p class="ar rv">بسم الله الرحمن الرحيم</p><p class="small rv">Nous avons le plaisir de vous inviter au mariage de</p>
+<h1 class="names script" style="font-weight:400"><span>Najwa</span><i>&amp;</i><span>Yassine</span></h1>
+<div class="rule rv"></div><p class="date rv">Samedi 12 juin 2027</p><p class="date sm rv">à 19h00</p></section>
+<section><h2 class="rv">Dans</h2><div class="cd rv" id="cd"><div><b id="d">0</b><small>jours</small></div><div><b id="h">0</b><small>heures</small></div><div><b id="m">0</b><small>min</small></div><div><b id="s">0</b><small>sec</small></div></div></section>
+<section><h2 class="rv">Le lieu</h2><p class="date rv">Salle Les Jardins Élégants</p><p class="rv sm">Marrakech</p><a class="btn rv" id="map" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></section>
+<section id="rsvp" hidden><h2 class="rv">Votre présence</h2><p class="small rv">Dites-nous si vous serez des nôtres.</p><div class="rv"><input id="gn" placeholder="Votre nom" autocomplete="name"></div>
+<div class="btns rv"><button class="btn" id="yes">Je serai présent(e)</button><button class="btn o" id="no">Je ne pourrai pas venir</button></div></section>
+<section><p class="small rv">Votre présence fera notre bonheur.</p><div class="rule rv"></div><p class="rv sm" style="font-size:16px">Najwa &amp; Yassine</p></section>
+</main>
+<script>
+// ===== À MODIFIER =====
+const CFG={date:'2027-06-12T19:00:00',lieu:'Salle Les Jardins Élégants, Marrakech',whatsapp:''/* ex: '212612345678' */};
+// ======================
+const $=id=>document.getElementById(id);
+$('map').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(CFG.lieu);
+if(CFG.whatsapp)$('rsvp').hidden=false;
+function rsvp(ok){const n=$('gn').value.trim()||'Un invité';const t=n+(ok?' sera présent(e) au mariage de Najwa & Yassine.':' ne pourra malheureusement pas venir au mariage de Najwa & Yassine.');
+window.open('https://wa.me/'+CFG.whatsapp+'?text='+encodeURIComponent(t),'_blank')}
+$('yes').onclick=()=>rsvp(1);$('no').onclick=()=>rsvp(0);
+function cd(){let x=new Date(CFG.date)-new Date();if(x<0)x=0;const v=[86400e3,36e5,6e4,1e3];['d','h','m','s'].forEach((k,i)=>{$(k).textContent=Math.floor(x/v[i])%(i?[0,24,60,60][i]:1e9)});}
+cd();setInterval(cd,1000);
+const sp=$('sp');for(let i=0;i<22;i++){const e=document.createElement('i');e.className='sp';const z=2+Math.random()*3;e.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${8+Math.random()*10}s;animation-delay:${-Math.random()*12}s`;sp.appendChild(e)}
+// Musique douce (générée dans le navigateur)
+let ac,tm,on=false,st=0;const N=[293.66,311.13,369.99,392,440,392,369.99,311.13];
+function note(){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='triangle';o.frequency.value=N[st%8]*(st%16<8?1:1.5);if(st%8==0)o.frequency.value/=2;
+g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.09,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+1.4);o.connect(g).connect(ac.destination);o.start(t);o.stop(t+1.5);st++}
+function music(v){try{if(v){ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();tm=setInterval(note,480)}else clearInterval(tm);on=v;$('mu').style.opacity=v?1:.5}catch(e){}}
+$('mu').onclick=()=>music(!on);
+// Ouverture
+let opened=false;function open(){if(opened)return;opened=true;$('env').classList.add('open');music(true);$('mu').style.display='block';
+setTimeout(()=>{$('cover').classList.add('gone');const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.3});document.querySelectorAll('section').forEach(s=>io.observe(s))},1900)}
+$('cover').onclick=open;$('cover').onkeydown=e=>{if(e.key==='Enter'||e.key===' ')open()};
+</script>
+</body>
+</html>
